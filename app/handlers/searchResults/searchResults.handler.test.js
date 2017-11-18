@@ -5,21 +5,17 @@ const { SequelService } = require('../../services/sequel.service');
 
 let _sequelService;
 
-describe('searchResults', () => {
+describe('#searchResults', () => {
   before(() => {
     _sequelService = new SequelService().getInstance();
   });
   after(() => {
     _sequelService.close();
+    app.close();
   });
-  describe('#searchResults', () => {
-    afterEach(() => {
-      app.close();
-    });
-    it('should be able to get the latest results', done => {
-      server(app)
-        .get('/latest')
-        .expect(200, done);
-    });
-  });
+  it('should be able to get the latest results', done => {
+    server(app)
+      .get('/latest')
+      .expect(200, done);
+  }).timeout(15000);
 });

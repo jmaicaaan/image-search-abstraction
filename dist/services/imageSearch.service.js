@@ -50,8 +50,10 @@ var ImageSearchService = function ImageSearchService() {
   };
 
   this.getLatestResults = function () {
-    return _this._searchResult.findAll({ limit: 10 }).then(function () {
-      return _this._sequel.close();
+    return _this._searchResult.findAll({ limit: 10 }).then(function (list) {
+      return _this._sequel.close().then(function () {
+        return list;
+      });
     });
   };
 

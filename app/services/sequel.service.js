@@ -6,7 +6,7 @@ class SequelService {
 
   constructor() {
     if (process.env.NODE_ENV == 'production') {
-      this._sequel = new Sequelize(process.env.DATABASE_URL, {
+      this._sequel = new Sequelize(process.env.DATABASE_URL || config.production.uri , {
         dialectOptions: {
           ssl: true
         }

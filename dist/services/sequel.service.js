@@ -27,7 +27,7 @@ var SequelService = function SequelService() {
   };
 
   if (process.env.NODE_ENV == 'production') {
-    this._sequel = new _sequelize2.default(process.env.DATABASE_URL, {
+    this._sequel = new _sequelize2.default(process.env.DATABASE_URL || _config2.default.production.uri, {
       dialectOptions: {
         ssl: true
       }

@@ -39,8 +39,11 @@ class ImageSearchService {
 
   getLatestResults = () => {
     return this._searchResult.findAll({ limit: 10 })
-      .then(() => {
-        return this._sequel.close();
+      .then((list) => {
+        return this._sequel.close()
+          .then(() => {
+            return list;
+          });
       });
   }
 }

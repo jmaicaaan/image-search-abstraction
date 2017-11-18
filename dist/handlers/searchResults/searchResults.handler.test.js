@@ -9,19 +9,15 @@ var _require = require('../../services/sequel.service'),
 
 var _sequelService = void 0;
 
-describe('searchResults', function () {
+describe('#searchResults', function () {
   before(function () {
     _sequelService = new SequelService().getInstance();
   });
   after(function () {
     _sequelService.close();
+    app.close();
   });
-  describe('#searchResults', function () {
-    afterEach(function () {
-      app.close();
-    });
-    it('should be able to get the latest results', function (done) {
-      server(app).get('/latest').expect(200, done);
-    });
-  });
+  it('should be able to get the latest results', function (done) {
+    server(app).get('/latest').expect(200, done);
+  }).timeout(15000);
 });
