@@ -38,7 +38,7 @@ class ImageSearchService {
 
   getLatestResults = () => {
     this.getConnection();
-    return this._searchResult.findAll({ limit: 10 })
+    return this._searchResult.findAll({ order:  [ ['updatedAt', 'DESC'] ], limit: 10 })
       .then((list) => {
         return this._sequel.close()
           .then(() => {
