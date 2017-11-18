@@ -13,10 +13,8 @@ class ImageSearchService {
   _searchResult;
 
   constructor() {
-    this._sequel = new SequelService().getInstance();
-    this._searchResult = searchResult(this._sequel, Sequelize);
     this.client = new googleImage(config.googleImage.cse, config.googleImage.apiKey);
-    
+    this.getConnection();
   }
 
   searchImage = (term, offset) => {
@@ -29,6 +27,7 @@ class ImageSearchService {
 
   addSearchResult = (term) => {
     if (term) {
+      this.getConnection();
       return this._searchResult.create({ term })
         .then(() => {
           return this._sequel.close();
@@ -38,6 +37,7 @@ class ImageSearchService {
   };
 
   getLatestResults = () => {
+    this.getConnection();
     return this._searchResult.findAll({ limit: 10 })
       .then((list) => {
         return this._sequel.close()
@@ -45,6 +45,11 @@ class ImageSearchService {
             return list;
           });
       });
+  }
+
+  getConnection = () => {
+    this._sequel = new SequelService().getInstance();
+    this._searchResult = searchResult(this._sequel, Sequelize);
   }
 }
 

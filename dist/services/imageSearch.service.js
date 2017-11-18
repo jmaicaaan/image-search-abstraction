@@ -42,6 +42,7 @@ var ImageSearchService = function ImageSearchService() {
 
   this.addSearchResult = function (term) {
     if (term) {
+      _this.getConnection();
       return _this._searchResult.create({ term: term }).then(function () {
         return _this._sequel.close();
       });
@@ -50,6 +51,7 @@ var ImageSearchService = function ImageSearchService() {
   };
 
   this.getLatestResults = function () {
+    _this.getConnection();
     return _this._searchResult.findAll({ limit: 10 }).then(function (list) {
       return _this._sequel.close().then(function () {
         return list;
@@ -57,9 +59,13 @@ var ImageSearchService = function ImageSearchService() {
     });
   };
 
-  this._sequel = new _sequel.SequelService().getInstance();
-  this._searchResult = (0, _search_result2.default)(this._sequel, _sequelize2.default);
+  this.getConnection = function () {
+    _this._sequel = new _sequel.SequelService().getInstance();
+    _this._searchResult = (0, _search_result2.default)(_this._sequel, _sequelize2.default);
+  };
+
   this.client = new _googleImages2.default(_keys2.default.googleImage.cse, _keys2.default.googleImage.apiKey);
+  this.getConnection();
 };
 
 exports.ImageSearchService = ImageSearchService;
