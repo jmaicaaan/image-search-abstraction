@@ -1,16 +1,29 @@
 const assert = require('assert');
 const app = require('../../../dist/index');
 const server = require('supertest');
+const imageSearch = require('../../services/imageSearch.service').ImageSearchService;
 
 describe('search', () => {
-  describe('#server', () => {
+  describe('#search', () => {
     afterEach(() => {
       app.close();
     });
-    it('should be able to access root /', done => {
+    it('should be able to add term', done => {
+      const term = 'Node.JS';
       server(app)
-        .get('/')
-        .expect(200, done);
+        .get('/search')
+        .query({ term })
+        .expect(200)
+        .end((err, res) => {
+          assert.equal(res.body.length > 0, true); //contains result
+          done(err);
+        });
     });
+    it('should not be able to add empty term', done => {
+      server(app)
+        .get('/search')
+        .query({ term: '' })
+        .expect(500, done);
+    })
   });
 });

@@ -9,11 +9,12 @@ import searchResult from '../../models/search_result';
 class ImageSearchService {
 
   client;
+  _sequel;
   _searchResult;
 
   constructor() {
-    const sequel = new SequelService().getInstance();
-    this._searchResult = searchResult(sequel, Sequelize);
+    this._sequel = new SequelService().getInstance();
+    this._searchResult = searchResult(this._sequel, Sequelize);
     this.client = new googleImage(config.googleImage.cse, config.googleImage.apiKey);
     
   }
@@ -29,12 +30,18 @@ class ImageSearchService {
   addSearchResult = (term) => {
     if (term) {
       return this._searchResult.create({ term })
+        .then(() => {
+          return this._sequel.close();
+        });
     }
     throw 'No term to be added';
   };
 
   getLatestResults = () => {
-    return this._searchResult.findAll({ limit: 10 });
+    return this._searchResult.findAll({ limit: 10 })
+      .then(() => {
+        return this._sequel.close();
+      });
   }
 }
 

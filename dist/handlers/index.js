@@ -27,3 +27,15 @@ Object.keys(_search).forEach(function (key) {
     }
   });
 });
+
+var _searchResults = require('./searchResults/searchResults.handler');
+
+Object.keys(_searchResults).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _searchResults[key];
+    }
+  });
+});

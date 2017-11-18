@@ -3,13 +3,13 @@ const app = require('../../../dist/index');
 const server = require('supertest');
 
 describe('searchResults', () => {
-  describe('#server', () => {
+  describe('#searchResults', () => {
     afterEach(() => {
       app.close();
     });
-    it('should be able to access root /', done => {
+    it('should be able to get the latest results', done => {
       server(app)
-        .get('/')
+        .get('/latest')
         .expect(200, done);
     });
   });
