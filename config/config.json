@@ -14,11 +14,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "fcc-image-abstraction",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
+    "username": "jdskonefgsurek",
+    "password": "dac82e8c5519cc1cd8b29dd151486fa3a7f73a07a938233586ec25eff649efd7",
+    "database": "d77ln7q9cbld5on",
+    "host": "ec2-107-21-205-25.compute-1.amazonaws.com",
+    "dialect": "d77ln7q9cbld5o",
     "dialectOptions": {
       "ssl": true
     }

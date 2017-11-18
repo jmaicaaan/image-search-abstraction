@@ -2,8 +2,17 @@ const assert = require('assert');
 const app = require('../../../dist/index');
 const server = require('supertest');
 const imageSearch = require('../../services/imageSearch.service').ImageSearchService;
+const { SequelService } = require('../../services/sequel.service');
+
+let _sequelService;
 
 describe('search', () => {
+  before(() => {
+    _sequelService = new SequelService().getInstance();
+  });
+  after(() => {
+    _sequelService.close();
+  });
   describe('#search', () => {
     afterEach(() => {
       app.close();
