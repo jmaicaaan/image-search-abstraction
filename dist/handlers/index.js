@@ -15,3 +15,15 @@ Object.keys(_intro).forEach(function (key) {
     }
   });
 });
+
+var _search = require('./search/search.handler');
+
+Object.keys(_search).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _search[key];
+    }
+  });
+});

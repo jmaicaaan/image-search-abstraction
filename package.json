@@ -27,7 +27,11 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "express": "^4.16.2",
-    "google-images": "^2.1.0"
+    "google-images": "^2.1.0",
+    "pg": "^6.4.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.22.7",
+    "sequelize-cli": "^3.0.0"
   },
   "devDependencies": {
     "assert": "^1.4.1",
