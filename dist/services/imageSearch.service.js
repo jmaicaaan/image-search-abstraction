@@ -52,7 +52,7 @@ var ImageSearchService = function ImageSearchService() {
 
   this.getLatestResults = function () {
     _this.getConnection();
-    return _this._searchResult.findAll({ limit: 10 }).then(function (list) {
+    return _this._searchResult.findAll({ order: [['updatedAt', 'DESC']], limit: 10 }).then(function (list) {
       return _this._sequel.close().then(function () {
         return list;
       });
